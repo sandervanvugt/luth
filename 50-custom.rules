@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="block", DRIVERS=="usb-storage", SYMLINK+="usb/%k", RUN+="/usr/bin/logger CUSTOMUDEV Added %k"
