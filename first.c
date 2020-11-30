@@ -1,4 +1,4 @@
-cat first.c 
+#include<stdio.h>
 main()
 {
 	first();
