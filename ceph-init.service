@@ -1,0 +1,12 @@
+[Unit]
+Description=initializes ceph image rbdimage to pool rbd
+
+[Service]
+Type=simple
+ExecStart=rbd map rbdimage --pool rbd --id admin --keyring /etc/ceph/ceph.client.admin.keyring
+Restart=on-failure
+RestartSec=15s
+
+[Install]
+WantedBy=basic.target
+

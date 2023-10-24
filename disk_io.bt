@@ -1,0 +1,3 @@
+tracepoint:block:block_rq_issue {
+    printf("%-16s %d %s %d\n", comm, pid, args->rwbs, args->bytes);
+}

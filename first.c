@@ -1,10 +1,4 @@
 #include<stdio.h>
-main()
-{
-	first();
-}
-
-first()
-{
+int main(){
 	printf("Hello world\n");
 }
