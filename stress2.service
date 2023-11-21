@@ -1,0 +1,7 @@
+[Unit]
+Description=create twice as much stress
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/dd if=/dev/zero of=/dev/null
+CPUShares=2048
