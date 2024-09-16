@@ -1,0 +1,135 @@
+    1  vim systemspace.txt
+    2  cat /etc/os-release 
+    3  ls -l /etc/shadow
+    4  cat /etc/shadow
+    5  ls -l /etc/shadow
+    6  man 7 capabilities
+    7  grep root /etc/passwd
+    8  less /etc/passwd
+    9  dnf install -y git
+   10  git clone https://github.com/sandervanvugt/luth
+   11  cd luth
+   12  ls
+   13  cp stress1.service sleep.service
+   14  vim sleep.service
+   15  man systemd.directives
+   16  man systemd.exec
+   17  vim sleep.service
+   18  cp sleep.service /etc/systemd/system/
+   19  systemctl daemon-reload
+   20  systemctl start sleep.service
+   21  ps aux | grep sleep
+   22  id sleep
+   23  grep sleep /etc/passwd
+   24  vim /etc/passwd
+   25  vim /etc/login.defs 
+   26  grep sleep /etc/shadow
+   27  less /etc/passwd
+   28  visudo
+   29  less /etc/passwd
+   30  vim compiling.txt
+   31  ./countdown 13
+   32  poweroff
+   33  lsmod
+   34  lsmod | less
+   35  ls -l /boot
+   36  modinfo cdrom | less
+   37  lsblk
+   38  cat /proc/partitions 
+   39  less /proc/devices 
+   40  ls -l /dev
+   41  less /proc/interrupts 
+   42  which passwd
+   43  ldd $(which passwd)
+   44  ps aux | grep fire
+   45  ps faux | grep fire
+   46  cd /proc/
+   47  ls
+   48  cd 2957
+   49  ls
+   50  cat cmdline 
+   51  cat status
+   52  cd fd
+   53  ls
+   54  ls -l
+   55  cd
+   56  exit
+   57  cd luth/
+   58  ./countdown 12
+   59  dd if=/dev/zero of=/dev/null &
+   60  history
+   61  vim storage.txt
+   62  lsblk
+   63  fdisk /dev/nvme0n1
+   64  cryptsetup luksFormat /dev/nvme0n1p4
+   65  xxd /dev/nvme0n1p4 | less
+   66  cryptsetup luksOpen /dev/nvme0n4 secret
+   67  cryptsetup luksOpen /dev/nvme0n1p4 secret
+   68  ls -l /dev/mapper/
+   69  mkfs.ext4 /dev/mapper/secret
+   70  mount /dev/mapper/secret /mnt
+   71  cp /etc/hosts /mnt
+   72  xxd /dev/mapper/secret | less
+   73  vim luks.txt
+   74  history
+   75  cat luks.txt 
+   76  vim luks.txt
+   77  cat luks.txt 
+   78  mkdir /data
+   79  man crypttab
+   80  vim /etc/crypttab
+   81  vim /etc/fstab
+   82  lsblk
+   83  reboot
+   84  touch hh
+   85  lsblk
+   86  vim /etc/crypttab
+   87  vim /etc/fstab
+   88  userdel root
+   89  vim /etc/passwd
+   90  vim /etc/shadow
+   91  vim /etc/fstab
+   92  vim /etc/crypttab 
+   93  mkdir /data
+   94  vim /etc/crypttab 
+   95  vim /etc/fstab
+   96  reboot
+   97  cd luth/
+   98  ./countdown 13
+   99  systemctl show sleep.service
+  100  lsns
+  101  vim /etc/systemd/system/sleep.service 
+  102  systemctl stop sleep.service
+  103  systemctl daemon-reload 
+  104  systemctl start sleep.service
+  105  lsns
+  106  podman run -it alpine 
+  107  ps faux | less
+  108  dnf install -y zsh && unshare --fork --pid --mount-proc zsh
+  109  exit
+  110  cd luth/
+  111  ls
+  112  vim stress1.service 
+  113  vim stress2.service 
+  114  cp stress* /etc/systemd/systemd/
+  115  cp stress* /etc/systemd/system/
+  116  systemctl daemon-reload
+  117  systemctl start stress1
+  118  systemctl start stress2
+  119  top
+  120  echo 0 > /sys/bus/cpu/devices/cpu1/online 
+  121  top
+  122  killall dd
+  123  dnf install -y httpd
+  124  systemctl edit httpd
+  125  systemctl start httpd
+  126  systemctl status httpd
+  127  systemctl show httpd
+  128  systemctl edit httpd
+  129  systemctl status httpd
+  130  systemctl edit httpd
+  131  systemctl status httpd
+  132  systemctl start httpd
+  133  systemctl status httpd
+  134  history
+  135  history > /tmp/160924.txt
