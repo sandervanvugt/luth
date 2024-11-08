@@ -1,0 +1,32 @@
+    1  cat /etc/passwd
+    2  mv /etc/shadow /etc/shadow.bak
+    3  reboot
+    4  systemctl start graphical.target
+    5  ps faux | grep -B 5 zsh
+    6  lsns -p $(pidof zsh)
+    7  nsenter -a -t $(pidof zsh) ps aux
+    8  dnf install -y httpd
+    9  systemctl show httpd
+   10  systemctl edit httpd
+   11  systemctl start httpd
+   12  systemctl status httpd
+   13  mount | grep cgroup
+   14  cd /sys/fs/cgroup/
+   15  ls
+   16  mkdir mycgroup
+   17  ls mycgroup/
+   18  dd if=/dev/zero of=/dev/null &
+   19  echo $! > cgroup.procs 
+   20  echo 25 > cpu.weight
+   21  echo 50 > cpu.weight
+   22  cd mycgroup/
+   23  ps aux | grep dd
+   24  echo 39095 > cgroup.procs 
+   25  echo 39085 > cgroup.procs 
+   26  echo 50 > cpu.weight
+   27  echo 0 > /sys/bus/cpu/devices/cpu1/online
+   28  top
+   29  dd if=/dev/zero of=/dev/null &
+   30  top
+   31  cd
+   32  history > /tmp/history-08nov24.txt
