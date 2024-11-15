@@ -1,0 +1,193 @@
+    1  cat /etc/passwd
+    2  mv /etc/shadow /etc/shadow.bak
+    3  reboot
+    4  systemctl start graphical.target
+    5  dnf install -y git
+    6  git clone https://github.com/sandervanvugt/luth
+    7  cd luth/
+    8  ls
+    9  ./countdown 12
+   10  echo hello
+   11  lsblk
+   12  cat /proc/modules 
+   13  cd /proc
+   14  ls
+   15  cat devices 
+   16  lsmod
+   17  modinfo e1000e
+   18  ls -l /dev/nvme*
+   19  ip a
+   20  ls -l /dev/en*
+   21  ldd $(which ls)
+   22  ps aux | grep firef
+   23  cd /proc/35629
+   24  ls
+   25  cat status
+   26  cd fd
+   27  ls
+   28  grep root /proc/* 2> /dev/null
+   29  ls -l
+   30  lsof --help | less
+   31  pwd
+   32  lsof -p 35629
+   33  podman run -d docker.io/library/nginx
+   34  podman ps
+   35  podman exec -it 0da sh
+   36  cd
+   37  cd /proc/sys
+   38  ls
+   39  cd /etc/modprobe.d/
+   40  ls
+   41  cd /usr/lib/modprobe.d/
+   42  ls
+   43  vim dist-alsa.conf 
+   44  cd
+   45  cd luth/
+   46  ./countdown 12
+   47  cd /proc/sys
+   48  ls
+   49  cd vm/
+   50  pwd
+   51  cat swappiness 
+   52  man proc
+   53  mount | grep proc
+   54  echo 30 > /proc/sys/vm/swappiness 
+   55  cat swappiness 
+   56  sysctl -a
+   57  sysctl -a | wc -l
+   58  vim /etc/sysctl.conf 
+   59  dnf install -y zsh
+   60  echo $SHELL
+   61  ps aux
+   62  unshare --fork --pid --mount-proc zsh
+   63  ps faux | grep -B 5 zsh
+   64  lsns -p $(pidof zsh)
+   65  nsenter -a -t $(pidof zsh) ps aux
+   66  dnf install -y httpd
+   67  systemctl show httpd
+   68  systemctl edit httpd
+   69  systemctl start httpd
+   70  systemctl status httpd
+   71  mount | grep cgroup
+   72  cd /sys/fs/cgroup/
+   73  ls
+   74  mkdir mycgroup
+   75  ls mycgroup/
+   76  dd if=/dev/zero of=/dev/null &
+   77  echo $! > cgroup.procs 
+   78  echo 25 > cpu.weight
+   79  echo 50 > cpu.weight
+   80  cd mycgroup/
+   81  ps aux | grep dd
+   82  echo 39095 > cgroup.procs 
+   83  echo 39085 > cgroup.procs 
+   84  echo 50 > cpu.weight
+   85  echo 0 > /sys/bus/cpu/devices/cpu1/online
+   86  top
+   87  dd if=/dev/zero of=/dev/null &
+   88  top
+   89  cd
+   90  history > /tmp/history-08nov24.txt
+   91  ip a
+   92  poweroff
+   93  cd /proc
+   94  less meminfo 
+   95  top
+   96  less /proc/meminfo 
+   97  cd sys/vm/
+   98  ls
+   99  free -m
+  100  echo 2 > drop_caches 
+  101  free -m
+  102  man proc
+  103  echo 3 > drop_caches 
+  104  free -m
+  105  man proc
+  106  cat swappiness 
+  107  cat /etc/sysctl.conf 
+  108  top
+  109  grep -i virt /proc/meminfo 
+  110  less /proc/meminfo 
+  111  arch
+  112  less /proc/cpuinfo 
+  113  top
+  114  slabtop
+  115  pwd
+  116  ls
+  117  cat dirty_expire_centisecs 
+  118  cat dirty_writeback_centisecs 
+  119  cd
+  120  cd luth/
+  121  ./countdown 12
+  122  top
+  123  reboot
+  124  systemctl set-default graphical.target
+  125  free -m
+  126  vmstat
+  127  vmstat 2 40
+  128  top
+  129  reboot
+  130  free -m
+  131  df -h
+  132  dd  if=/dev/zero of=/swapfile bs=1M count=1024
+  133  chmod 0600 /swapfile
+  134  mkswap /swapfile
+  135  free -m
+  136  swapon /swapfile
+  137  free -m
+  138  echo 90 >/proc/sys/vm/swappiness 
+  139  free -m
+  140  echo 60 >/proc/sys/vm/swappiness 
+  141  less /proc/meminfo 
+  142  cd /proc/sys/vm/
+  143  ls
+  144  echo 200 > nr_hugepages
+  145  free -m
+  146  cat /proc/meminfo 
+  147  vim /etc/sysctl.conf 
+  148  reboot
+  149  free -m
+  150  cat /proc/meminfo 
+  151  strace ls
+  152  strace -c
+  153  strace -c ls
+  154  mount
+  155  mount | grep huge
+  156  cd /proc
+  157  ls
+  158  echo h > sysrq-trigger 
+  159  dmesg
+  160  echo f > sysrq-trigger 
+  161  vim /etc/sysctl.conf 
+  162  reboot
+  163  top
+  164  cat /proc/1977/oom_score
+  165  top
+  166  cat /proc/2653/oom_score
+  167  cat /proc/1/oom_score
+  168  ps aux | grep top
+  169  sleep infinity &
+  170  cat /proc/2865/oom_score
+  171  top
+  172  echo f > /proc/sysrq-trigger 
+  173  dmesg
+  174  echo -400 > /proc/$(pidof gnome-shell)/oom_score_adj
+  175  top
+  176  echo f > /proc/sysrq-trigger 
+  177  dmesg
+  178  systemctl list-unit-files | grep gnome
+  179  systemctl show sshd.service
+  180  systemctl edit sshd.service
+  181  systemctl status sshd.service
+  182  cat /proc/987/oom_score_adj 
+  183  cat /proc/987/oom_score
+  184  less /proc/meminfo 
+  185  slabinfo 
+  186  slabinfo | less
+  187  cd /proc/sys/vm
+  188  ls
+  189  cd ../kernel/
+  190  ls
+  191  cd
+  192  history
+  193  history > /tmp/nov2024.txt
