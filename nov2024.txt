@@ -191,3 +191,165 @@
   191  cd
   192  history
   193  history > /tmp/nov2024.txt
+  194  ip a
+  195  poweroff
+  196  dnf install nfs-utils
+  197  mkdir -p /nfsdata /home/ldap/ldapuser{1..9}
+  198  ls -l /home/ldap
+  199  vim /etc/exports
+  200  systemctl enable --now nfs-server
+  201  systemctl status nfs-server
+  202  poweroff
+  203  hostnamectl hostname nfsserver.example.local
+  204  ip a
+  205  vim /etc/sysctl.conf 
+  206  reboot
+  207  ps faux | grep -B 1 sleep 
+  208  ps faux | less
+  209  cd luth/
+  210  ls
+  211  gcc -o zombie zombie.c
+  212  ls
+  213  ./zombie &
+  214  top
+  215  vim zombie.c 
+  216  gcc -o zombie zombie.c
+  217  ./zombie &
+  218  ps aux | grep defunc
+  219  ps aux | grep -B 5 defunc
+  220  ps faux | grep -B 5 defunc
+  221  kill 4425
+  222  ps faux | grep -B 5 defunc
+  223  kill 4424
+  224  ps faux | grep -B 5 defunc
+  225  ./zombie &
+  226  ps faux | grep -B 5 defunc
+  227  kill -s SIGCHLD 4438
+  228  ps faux | grep -B 5 defunc
+  229  kill -9 4438
+  230  ps faux | grep -B 5 defunc
+  231  ps aux | grep sleep
+  232  chrt -p 3535
+  233  man chrt
+  234  chrt --max
+  235  dd if=/dev/zero of=/dev/null &
+  236  chrt -p 4488
+  237  top
+  238  man chrt
+  239  chrt -i -p 0 4488
+  240  top
+  241  dd if=/dev/zero of=/dev/null &
+  242  top
+  243  echo 0 > /sys/bus/cpu/devices/cpu1/online 
+  244  top
+  245  chrt -r 50 dd if=/dev/zero of=/dev/null &
+  246  top
+  247  echo 1 > /sys/bus/cpu/devices/cpu1/online 
+  248  top
+  249  dd if=/dev/zero of=/dev/null &
+  250  top
+  251  systemctl show sshd
+  252  taskset --help
+  253  ps aux | grep dd
+  254  taskset -pc 1 4488
+  255  top
+  256  echo 0 > /sys/bus/cpu/devices/cpu1/online 
+  257  top
+  258  killall dd
+  259  dd if=/dev/zero of=/dev/null &
+  260  pidof dd
+  261  renice -5 4569
+  262  renice 10 4568
+  263  top
+  264  chrt -r 50 dd if=/dev/zero of=/dev/null &
+  265  toop
+  266  top
+  267  kill 4609
+  268  history
+  269  cd /proc/sys
+  270  ls
+  271  cd kernel/
+  272  ls
+  273  ls sched*
+  274  man proc
+  275  man sched
+  276  top
+  277  killall dd
+  278  history
+  279  echo 1 > /sys/bus/cpu/devices/cpu1/online 
+  280  cd
+  281  mkfifo myfifo
+  282  ls -l myfifo 
+  283  cat myfifo
+  284  ls -l myfifo 
+  285  cat myfifo 
+  286  unlink mmyfi
+  287  unlink myfifo 
+  288  ls
+  289  cd luth/
+  290  ls
+  291  cat dbus-commands.sh 
+  292  dbus-send --system --print-reply             --dest=org.freedesktop.NetworkManager             /org/freedesktop/NetworkManager             org.freedesktop.DBus.Properties.Get             string:"org.freedesktop.NetworkManager"             string:"NetworkingEnabled"
+  293  dbus-send --system --print-reply             --dest=org.freedesktop.NetworkManager             /org/freedesktop/NetworkManager/ActiveConnection/6             org.freedesktop.DBus.Properties.Get             string:"org.freedesktop.NetworkManager.Connection.Active"             string:"Devices"
+  294  busctl list
+  295  ldd $(which ls)
+  296  cd /proc/
+  297  ls
+  298  cd 2353
+  299  cat cmdline 
+  300  cd ../1987
+  301  cat cmdline 
+  302  cat status 
+  303  vmstat
+  304  vmstat -s
+  305  cd
+  306  strace ls |& less
+  307  strace -c ls
+  308  ls *
+  309  strace -c ls *
+  310  strace -c ls /etc/*
+  311  strace -d echo /etc/*
+  312  strace -d echo *
+  313  strace -c echo /etc/*
+  314  strace -c ls *
+  315  strace echo hello > hellofile
+  316  strace echo hello > hellofile |& less
+  317  strace echo hello > hellofile 
+  318  dnf install -y netcat
+  319  netcat -l 8080
+  320  strace netcat -l 8080
+  321  history
+  322  ps aux
+  323  ps aux | grep ssh
+  324  pmap --help
+  325  pmap 1018
+  326  cat /proc/$(pidof sshd)/status
+  327  cat /proc/$(pidof sshd)/maps
+  328  pmap -X $(pidof sshd)
+  329  pmap -X $(pidof sshd) | less
+  330  echo $$
+  331  ps aux | grep 3556
+  332  dnf install -y zsh
+  333  zsh
+  334  exec zsh
+  335  history | grep cpu
+  336  echo 1 > /sys/bus/cpu/devices/cpu1/online 
+  337  cp stress* /etc/systemd/system
+  338  systemctl start stress1
+  339  systemctl start stress2
+  340  top
+  341  echo 0 > /sys/bus/cpu/devices/cpu1/online 
+  342  top
+  343  cat /sys/fs/cgroup/system.slice/
+  344  cat /sys/fs/cgroup/system.slice/stress1.service/cpu.weight
+  345  cat /sys/fs/cgroup/system.slice/stress2.service/cpu.weight
+  346  echo 800 > /sys/fs/cgroup/system.slice/stress2.service/cpu.weight
+  347  top
+  348  killall dd
+  349  echo 1 > /sys/bus/cpu/devices/cpu1/online 
+  350  top
+  351  systemctl start stress1
+  352  systemctl start stress2
+  353  top
+  354  cd
+  355  history > /tmp/nov2024.txt
