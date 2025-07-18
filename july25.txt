@@ -1,0 +1,170 @@
+    1  lsusb
+    2  lsusb --help | less
+    3  lsusb -t
+    4  lsusb -tv
+    5  ls -l /etc/shadow
+    6  cat /etc/shadow
+    7  man 7 capabilities
+    8  free -m
+    9  lsmod
+   10  ls /dev
+   11  ls -l /dev/nvme0n1
+   12  ls -l /etc/hosts
+   13  cd /proc
+   14  ls
+   15  less devices 
+   16  ls -l /dev/nvme0*
+   17  cd
+   18  udevadm monitor
+   19  lsblk
+   20  lspci 
+   21  lspci -k
+   22  ssh student@192.168.52.160
+   23  dnf install nmap -y
+   24  nmap -sn 192.168.52.0/24
+   25  ssh student@192.168.52.160
+   26  nmap 192.168.52.160
+   27  ssh -vv 192.168.52.160
+   28  ssh -vv student@192.168.52.160
+   29  systemctl default multi-user.target
+   30  systemctl set-default multi-user.target
+   31  mv /etc/passwd /etc/.passwd
+   32  mv /etc/shadow /etc/.shadow
+   33  ssh student@192.168.52.160
+   34  reboot
+   35  cd luth/
+   36  ./countdown 12
+   37  exit
+   38  ps faux | grep -B 5 zsh
+   39  lsns -p $(pidof zsh)
+   40  nsenter -a -t $(pidof zsh) ps aux
+   41  ps faux | less
+   42  nsenter -a -t 9242 ps aux
+   43  nsenter -a -t 9242 cat /etc/os-release
+   44  cd luth/
+   45  ./countdown 13
+   46  ls
+   47  cat stress1.service 
+   48  cat stress2.service 
+   49  cp stress* /etc/systemd/system
+   50  systemctl daemon-reload
+   51  systemctl start stress1
+   52  systemctl start stress2
+   53  top
+   54  cat /sys/bus/cpu/devices/cpu1/online
+   55  echo 0 > /sys/bus/cpu/devices/cpu1/online
+   56  top
+   57  killall dd
+   58  echo 1 > /sys/bus/cpu/devices/cpu1/online
+   59  echo 0 > /sys/bus/cpu/devices/cpu1/online
+   60  mount 
+   61  mount | grep cgroup
+   62  cd /sys/fs/cgroup/
+   63  mkdir mycgroup
+   64  cd mycgroup/
+   65  ls
+   66  cat cgroup.procs 
+   67  dd if=/dev/zero of=/dev/null & echo $! > cgroup.procs
+   68  cat cgroup.procs 
+   69  echo 50 > cpu.weight
+   70  dd if=/dev/zero of=/dev/null &
+   71  top
+   72  cat cgroup.procs 
+   73  killall dd
+   74  echo 1 > /sys/bus/cpu/devices/cpu1/online
+   75  cd
+   76  taskset --help
+   77  man systemd.directives
+   78  echo 0 > /sys/bus/cpu/devices/cpu1/online
+   79  systemctl start stress1
+   80  systemctl start stress2
+   81  top
+   82  echo 1 > /sys/bus/cpu/devices/cpu1/online
+   83  cat /proc/cpuinfo 
+   84  less /proc/meminfo 
+   85  ssh student@192.168.52.160
+   86  ldd $(which ls)
+   87  dnf install -y git
+   88  git clone https://github.com/sandervanvugt/luth
+   89  cd luth
+   90  ls
+   91  history
+   92  ps aux | less
+   93  dnf install -y firefox
+   94  ps aux | grep firefo
+   95  ps faux | grep firefo
+   96  cd /proc/
+   97  cd 7650
+   98  ls
+   99  cat status
+  100  cd fd
+  101  ls 
+  102  ls -l
+  103  cd
+  104  ps aux | grep vim
+  105  ps faux | grep vim
+  106  cd /proc/8725
+  107  cd fd
+  108  ls -l
+  109  cd
+  110  mkdir /var/chroot
+  111  dnf --installroot=/var/chroot install -y httpd
+  112  ls -l /var/chroot/
+  113  cp /etc/{passwd,group,resolv.conf} /var/chroot/etc/
+  114  mount -o bind /dev /var/chroot/dev
+  115  mount -o bind /proc /var/chroot/proc
+  116  mount -o bind /sys /var/chroot/sys
+  117  chroot /var/chroot
+  118  lsns
+  119  cd /proc/
+  120  ls
+  121  cd 2852
+  122  ls ns
+  123  lsns
+  124  cd
+  125  dnf install -y zsh
+  126  unshare --fork --pid --mount-proc zsh
+  127  top
+  128  cd luth/
+  129  ./countdown 13
+  130  top
+  131  less /proc/meminfo 
+  132  top
+  133  cd /proc/sys/
+  134  ls
+  135  cd vm
+  136  ls
+  137  cat dirty_expire_centisecs 
+  138  cat /proc/meminfo | grep ctive
+  139  grep -i huge /proc/meminfo 
+  140  free -m
+  141  ls
+  142  echo 200 > nr_hugepages
+  143  free -m
+  144  grep -i huge /proc/meminfo 
+  145  vim /etc/sysctl.conf 
+  146  mount | grep huge
+  147  top
+  148  grep -i committ /proc/meminfo 
+  149  top
+  150  vim /etc/sysctl.conf 
+  151  top
+  152  reboot
+  153  top
+  154  vim /etc/sysctl.conf 
+  155  reboot
+  156  top
+  157  ps aux | grep vmtools
+  158  cd /proc/949
+  159  ls
+  160  cat oom_score
+  161  echo 400 > oom_score_adj 
+  162  cat oom_score
+  163  cd /proc
+  164  cat sysrq-trigger 
+  165  echo h > sysrq-trigger 
+  166  dmesg
+  167  echo f > sysrq-trigger 
+  168  journalctl
+  169  exit
+  170  history > /tmp/july25.txt
