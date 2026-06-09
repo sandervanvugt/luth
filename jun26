@@ -1,0 +1,187 @@
+    1  sudo hostnamectl hostname control
+    2  exit
+    3  cd ansiblefundamentals/
+    4  ./countdown 1
+    5  ./countdown 14
+    6  cd ansiblefundamentals/
+    7  ;s
+    8  ./countdown 13
+    9  cd ansiblefundamentals/
+   10  ./countdown 14
+   11  sudo dnf install -y git vim
+   12  sudo vim /etc/hosts
+   13  ip a
+   14  ssh 192.168.29.141
+   15  ssh 192.168.29.142
+   16  sudo vim /etc/hosts
+   17  ping ansible1
+   18  ping ansible2
+   19  ansible --version
+   20  sudo dnf install ansible-core
+   21  ansible --version
+   22  history
+   23  vim inventory
+   24  cat inventory 
+   25  ansible -i inventory all -u student -b -k -K -m command -a "useradd ansible"
+   26  ssh-keygen
+   27  ssh-keygen ansible1
+   28  ssh-copy-id ansible1
+   29  ssh ansible1
+   30  ssh-copy-id ansible2
+   31  history
+   32  ansible -i inventory all -u student -b -K -m command -a "useradd ansible"
+   33  cat inventory 
+   34  ssh-copy-id control
+   35  ansible -i inventory all -u student -b -K -m command -a "useradd ansible"
+   36  history
+   37  git clone https://github.com/sandervanvugt/ansiblefundamentals
+   38  ansible -i inventory all -u student -b -K -m shell -a "echo password | passwd --stdin ansible"
+   39  ansible -i inventory all -u student -b -K -m command -a "rpm -qa | grep bash"
+   40  history
+   41  ansible -i inventory all -u student -b -K -m shell -a "rpm -qa | grep bash"
+   42  ansible -i inventory all -u ansible -m command -a "ls -l /root"
+   43  ansible -i inventory -u student -b -K all -m copy -a 'content="ansible ALL=(ALL) NOPASSWD: ALL" dest=/etc/sudoers.d/ansible'
+   44  su - ansible
+   45  history | less
+   46  su - ansible
+   47  sudo systemctl list-dependencies
+   48  sudo systemctl isolate graphical.target
+   49  sudo -i
+   50  ps faux | grep -B5 zsh
+   51  lsns -p $(pidof zsh)
+   52  nsenter -a -t $(pidof zsh) ps aux
+   53  sudo nsenter -a -t $(pidof zsh) ps aux
+   54  sudo lsns -p $(pidof zsh)
+   55  podman run -d --name web01 nginx
+   56  podman ps
+   57  podman run -d --name web02 nginx
+   58  podman inspect web01 --format '{{.State.Pid}}'
+   59  ps faxu | grep -B5 7558
+   60  podman inspect web02 --format '{{.State.Pid}}'
+   61  sudo nsenter -u -t 7558 id
+   62  sudo nsenter -u -t 7628 id
+   63  sudo -i
+   64  history > /tmp/jun26
+    1  ls -l /etc/shadow
+    2  whoami
+    3  tail /etc/shadow
+    4  chmod 000 /etc/shadow
+    5  cat /etc/shadow
+    6  history
+    7  man 7 capabilities
+    8  dnf install -y strace
+    9  history
+   10  cat /etc/hosts
+   11  strace cat /etc/hosts
+   12  ls *
+   13  echo *
+   14  time ls *
+   15  dd if=/dev/zero of=/dev/null &
+   16  time ls *
+   17  time echo *
+   18  strace -c echo *
+   19  strace -c ls *
+   20  man mmap
+   21  man man
+   22  man mmap
+   23  man 2 intro
+   24  man 3 intro
+   25  dnf install -y nmap
+   26  nmap -sn 192.168.29.0/24
+   27  nmap -sn 192.168.52.0/24
+   28  ping muela1
+   29  ssh student@muela1
+   30  cd /sys/block/
+   31  ls
+   32  cd nvme0n1/queue/
+   33  cat scheduler 
+   34  systemctl isolate multi-user.target
+   35  cd /proc
+   36  ls
+   37  sysctl -a
+   38  sysctl -a | wc -l
+   39  ls
+   40  less cpuinfo 
+   41  arch
+   42  lscpu
+   43  ls
+   44  less meminfo 
+   45  echo h > sysrq-trigger 
+   46  dmesg
+   47  history -w
+   48  cd /proc
+   49  ls
+   50  less devices 
+   51  lsblk
+   52  less devices 
+   53  ssh muela1
+   54  ssh student@muela1
+   55  cd sys
+   56  ls
+   57  cd vm
+   58  ls
+   59  less /proc/meminfo 
+   60  ssh student@muela1
+   61  ls
+   62  cat dirty_expire_centisecs 
+   63  cat dirty_writeback_centisecs 
+   64  echo 6000 > dirty_expire_centisecs 
+   65  vim /etc/sysctl.conf 
+   66  cat swappiness 
+   67  dnf list kernel*
+   68  dnf install -y kernel-doc
+   69  rpm -ql kernel-doc
+   70  cd /usr/share/doc/kernel-doc-6.12.0-233/Documentation/
+   71  ls
+   72  grep -R swappiness *
+   73  grep -Rl swappiness *
+   74  less admin-guide/kernel-parameters.txt 
+   75  less admin-guide/sysctl/vm.rst 
+   76  export kerneldoc=$(pwd)
+   77  echo $kerneldoc 
+   78  cd /proc/sys/vm
+   79  ls
+   80  cd $kerneldoc
+   81  grep -Rl overcommit_memory *
+   82  less admin-guide/sysctl/vm.rst 
+   83  cd -
+   84  cat overcommit_memory 
+   85  vim /etc/sysctl.conf 
+   86  reboot
+   87  cd /proc/sys
+   88  ls
+   89  cd ..
+   90  ls
+   91  cd 3361
+   92  ls
+   93  cat cmdline 
+   94  cd ../935
+   95  cat cmdline 
+   96  ls
+   97  cat status
+   98  exit
+   99  man systemd.directives
+  100  systemctl cat vsftpd.service
+  101  systemctl status vsftpd.service
+  102  systemctl start vsftpd.service
+  103  systemctl status vsftpd.service
+  104  systemctl edit vsftpd.service
+  105  systemctl status vsftpd.service
+  106  cd lut
+  107  ls
+  108  dnf install -y git
+  109  git clone https://github.com/sandervanvugt/luth
+  110  cd luth
+  111  ls
+  112  cat stress1.service 
+  113  cat stress2.service 
+  114  lscpu
+  115  echo 0 > /sys/bus/cpu/devices/cpu1/online
+  116  lscpu
+  117  cp stress* /etc/systemd/system/
+  118  systemctl daemon-reload
+  119  systemctl start stress1
+  120  systemctl start stress2
+  121  top
+  122  exit
+  123  history >> /tmp/jun26 
