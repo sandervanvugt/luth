@@ -1,0 +1,606 @@
+    1  vim /etc/fstab
+    2  mount -a
+    3  reboot
+    4  history
+    5  vgs
+    6  pvs
+    7  vgextend vgdata /dev/nvme0n2p3
+    8  vgs
+    9  lvs
+   10  lvresize -r /dev/vgdata/lvdata -l +50%FREE
+   11  lvs
+   12  df -h
+   13  history
+   14  history > /tmp/sept26.txt 
+   15  history | grep git
+   16  echo $(( 1024 * 1024 ))
+   17  lsblk
+   18  fdisk /dev/nvme0n1
+   19  vgcreate vgdb /dev/nvme0n1p5
+   20  vgs
+   21  lvcreate -n lvdb -L 1020M vgbd
+   22  lvcreate -n lvdb -L 1020M vgdb
+   23  lvs
+   24  mkfs.xfs /dev/vgdb/lvdb
+   25  mkdir /lvdb
+   26  vim /etc/fstab
+   27  mount -a
+   28  mount
+   29  vgextend vgdb /dev/nvme0n1p6
+   30  vgs
+   31  lvresize -r /dev/vgdb/lvdb -l +100%FREE
+   32  df -h
+   33  history
+   34  systemctl status NetworkManager
+   35  ip route show
+   36  ip a
+   37  nmtui
+   38  exit
+   39  vim /etc/hosts
+   40  ping lilayi
+   41  ip a
+   42  history
+   43  man nmcli-examples
+   44  cd /etc/sysconfig/
+   45  ls
+   46  cat network 
+   47  cd ..
+   48  cd NetworkManager/
+   49  ls
+   50  cd system-connections/
+   51  ls
+   52  vim ens160.nmconnection 
+   53  ping lilayi
+   54  cd
+   55  dnf install nfs-utils -y
+   56  vim /etc/hosts
+   57  showmount -e nfsserver
+   58  mount nfsserver:/nfsdata /mnt
+   59  mount
+   60  cd /mnt
+   61  touch hello
+   62  ls
+   63  cd
+   64  umount /mnt
+   65  history
+   66  dnf install -y autofs
+   67  cd /etc
+   68  vim auto.master
+   69  vim auto.misc 
+   70  vim auto.master
+   71  vim auto.nfsdata
+   72  systemctl enable --now autofs
+   73  ls /
+   74  cd /nfsdata
+   75  ls -al
+   76  cd files
+   77  mount
+   78  history
+   79  grep nfsdata /etc/auto.master
+   80  cat /etc/auto.nfsdata 
+   81  vim /etc/auto.master
+   82  vim /etc/auto.ldap
+   83  cd /home
+   84  ls
+   85  systemctl restart autofs
+   86  ls
+   87  cd ldap
+   88  ls -a
+   89  cd ldapuser1
+   90  cd ..
+   91  ls
+   92  cd ldapuser4
+   93  history
+   94  grep ldap /etc/auto.master
+   95  cat /etc/auto.ldap
+   96  cd
+   97  rpm -qa | grep http
+   98  ps aux | grep http
+   99  systemctl enable --now httpd
+  100  ps aux | grep http
+  101  ps Zaux | grep http
+  102  ls -lZ /var/www
+  103  echo hello > /var/www/html/index.html
+  104  systemctl restart httpd
+  105  curl localhost
+  106  mkdir /web
+  107  echo goedemiddag > /web/index.html
+  108  vim /etc/httpd/conf/httpd.conf 
+  109  systemctl restart httpd
+  110  curl localhost
+  111  ps Zaux | grep httpd
+  112  ls -ldZ /web
+  113  history
+  114  ps Zaux 
+  115  ps Zaux | grep ssh
+  116  semanage port -l
+  117  semanage port -l | grep ssh
+  118  getenforce
+  119  setenforce permissive
+  120  curl localhost
+  121  setenforce enforcing
+  122  grep AVC /var/log/audit/audit.log 
+  123  date -d @1790780331
+  124  ls -lZ /var/www
+  125  ls -Z /var/www/html/index.html 
+  126  getenforce
+  127  curl localhost
+  128  man semanage-fcontext
+  129  semanage fcontext -a -t httpd_sys_content_t "/web(/.*)?"
+  130  ls -ldZ /web
+  131  restorecon -Rv /web
+  132  curl localhost
+  133  history
+  134  cd /etc/selinux/
+  135  ls
+  136  cd targeted/
+  137  ls
+  138  cd contexts/
+  139  ls
+  140  cd ../policy/
+  141  las
+  142  ls
+  143  cd
+  144  semanage fcontext -l
+  145  semanage fcontext -l | grep web
+  146  getsebool -a 
+  147  getsebool -a | grep ftp
+  148  setsebool -P ftpd_anon_write on
+  149  getsebool -a | grep ftp
+  150  semanage fcontext -l -C
+  151  semanage fcontext -Cl
+  152  ssh localhost
+  153  ssh student@localhost
+  154  dnf install -y nmap
+  155  nmap 192.168.29.100
+  156  vim /etc/ssh/sshd_config
+  157  systemctl restart sshd
+  158  systemctl status sshd
+  159  journalctl -eu sshd.service
+  160  setenforce permissive
+  161  systemctl restart sshd
+  162  setenforce enforcing
+  163  grep AVC /var/log/audit/audit.log 
+  164  man semanage-port
+  165  semanage port -a -t ssh_port_t -p tcp 2022
+  166  getenforce
+  167  systemctl restart sshd
+  168  ss -tupn
+  169  ss -tupnl
+  170  ss -tulpn
+  171  history
+  172  journalctl | grep sealert
+  173  sealert -l b9d8e12d-c3f4-4e0d-b70a-e05a873557ff | less
+  174  sealert -l cdfbe3ac-dd11-4e99-aaac-6141ffa93db6 | less
+  175  journalctl | grep sealert
+  176  sealert -l 8fc3678e-1884-4bbf-bbfe-ae7a67d63b0b | less
+  177  cp /etc/hosts /web
+  178  ls -lZ /etc/hosts /web/hosts
+  179  rm /etc/hosts
+  180  mv /web/hosts /etc/
+  181  ls -Z /etc/hosts
+  182  restorecon -v /etc/hosts
+  183  history
+  184  reboot
+  185  history > /tmp/sept26.txt 
+  186  vim /etc/ssh/sshd_config
+  187  systemctl restart sshd
+  188  firewall-cmd --list-all
+  189  firewall-cmd --get-services
+  190  cd /usr/lib/firewalld/services/
+  191  vim ssh.xml 
+  192  firewall-cmd --list-all
+  193  firewall-cmd --add-service httpd
+  194  firewall-cmd --list-all
+  195  firewall-cmd --reload
+  196  firewall-cmd --list-all
+  197  firewall-cmd --add-service httpd --permanent
+  198  firewall-cmd --add-service http --permanent
+  199  firewall-cmd --reload
+  200  nmap -sn 192.168.29.0/24
+  201  nmap -p 22 192.168.29.139
+  202  curl -v http://localhost:80
+  203  nc -zv nfsserver.example.com 22
+  204  nc -zv nfsserver.example.com 23
+  205  history
+  206  cd
+  207  cd -
+  208  cp http.xml /etc/firewalld/services/web.xml
+  209  vim /etc/firewalld/services/web.xml
+  210  firewall-cmd --reload
+  211  firewall-cmd --list-all | grep web
+  212  firewall-cmd --get-services
+  213  firewall-cmd --add-service web --permanent
+  214  firewall-cmd --reload
+  215  history
+  216  cd
+  217  systemctl status atd
+  218  at teatime
+  219  atq
+  220  systemctl status crond
+  221  vim /etc/crontab 
+  222  ls /etc/cron*/*
+  223  ls -d /etc/cron*/
+  224  crontab -u thando -e
+  225  journalctl -f
+  226  systemctl list-units -t timer
+  227  systemctl list-units fstrim*
+  228  systemctl list-unit-files fstrim*
+  229  systemctl cat fstrim.service
+  230  systemctl status fstrim.service
+  231  systemctl cat fstrim.timer
+  232  systemctl list-units -t timer
+  233  systemctl list-unit-files -t timer
+  234  dnf install -y sysstat
+  235  systemctl list-unit-files -t timer
+  236  systemctl cat fstrim.timer
+  237  man systemd.time
+  238  man systemd.timer
+  239  history
+  240  vim /etc/crontab 
+  241  man 5 crontab
+  242  crontab -e -u linda
+  243  sysctl -a
+  244  sysctl -a | wc -l
+  245  systemctl status tuned
+  246  tuned-adm list
+  247  tuned-adm profile powersave
+  248  tuned-adm recommend
+  249  history
+  250  vim /etc/default/grub 
+  251  cd /boot/loader/entries/
+  252  ls
+  253  vim c965ed2666764ffeace11a03a1556c35-6.12.0-211.7.3.el10_2.aarch64.conf 
+  254  grub2-mkconfig -o /boot/grub2/grub.cfg
+  255  history
+  256  cd
+  257  free -m
+  258  grep ctive /proc/meminfo
+  259  fdisk /dev/nvme0n1
+  260  free -m
+  261  mkswap /dev/nvme0n1p7
+  262  blkid | awk '/n1p7/ { print $2 }'
+  263  blkid | awk '/n1p7/ { print $2 }' >> /etc/fstab
+  264  vim /etc/fstab
+  265  swapon -a
+  266  free -m
+  267  history
+  268  ssh student@nfsserver
+  269  hwclock
+  270  timedatectl show
+  271  timedatectl set-timezone Africa/Nairobi
+  272  timedatectl show
+  273  date
+  274  hwclock
+  275  date -s 17:51
+  276  hwclock --help
+  277  systemctl status chrony
+  278  systemctl status chronyd
+  279  vim /etc/chrony.conf 
+  280  systemctl restart nfsserver
+  281  systemctl restart chronyd
+  282  chronyc sources
+  283  ssh student@nfsserver
+  284  chronyc sources
+  285  systemctl restart chronyd
+  286  chronyc sources
+  287  history
+  288  history | grep clone
+  289  cd rhcsa10/
+  290  ls
+  291  cd labs
+  292  ls
+  293  cd ..
+  294  less mini-exam-45min.txt 
+  295  git pull
+  296  less mini-exam-45min.txt 
+  297  exit
+  298  dnf install -y httpd
+  299  vim /etc/httpd/conf/httpd.conf 
+  300  man semanage-port
+  301  semanage port -a -t http_port_t -p tcp 82
+  302  systemctl restart httpd
+  303  useradd -u 1100 -s /sbin/nologin lori
+  304  grep lori /etc/passwd
+  305  grep '[Aa]dministrator' /etc/*
+  306  grep '[Aa]dministrator' /etc/* 2>/dev/null
+  307  grep '^[Aa]dministrator' /etc/* 2>/dev/null
+  308  grep -R '^[Aa]dministrator' /etc/* 2>/dev/null
+  309  grep -Rl '^[Aa]dministrator' /etc/* 2>/dev/null
+  310  grep -Rl '^[Aa]dministrator' /etc/* 2>/dev/null >/tmp/stratorfiles.txt
+  311  ln -s /etc/hosts /tmp/hosts
+  312  ls -l /tmp/hosts
+  313  mkdir -p /data/sales
+  314  chown linda:sales /data/sales
+  315  chmod 3770 /data/sales
+  316  groupadd sales
+  317  usermod -aG sales linda
+  318  usermod -aG sales lisa
+  319  echo $(( 4 * 150 ))
+  320  vgs
+  321  lvcreate -n lvlab -L 600M vgdata
+  322  mkfs.xfs /dev/vgdata/lvdata
+  323  mkdir /lvlab
+  324  vim /etc/fstab
+  325  mount -a
+  326  mkfs.xfs /dev/vgdata/lvlab
+  327  mount -a
+  328  vim /etc/fstab
+  329  mount -a
+  330  systemctl daemon-reload
+  331  cd /run/systemd/generator/
+  332  kls
+  333  ls
+  334  cat lvlab.mount
+  335  cp lvlab.mount /etc/systemd/system/
+  336  systemctl daemon-reload
+  337  systemctl enable lvlab.mount
+  338  cat /etc/systemd/system/sleep.service 
+  339  vim /etc/systemd/system/lvlab.mount 
+  340  systemctl daemon-reload
+  341  vim /etc/fstab
+  342  umount /lvlab 
+  343  systemctl enable --now lvlab.mount
+  344  systemctl status lvlab.mount
+  345  cd
+  346  tuned-adm recommend
+  347  tuned-adm profile virtual-guest
+  348  man find
+  349  find / -perm /6000 2>/dev/null
+  350  vim sugidcheck
+  351  chmod +x sugidcheck 
+  352  ./sugidcheck 
+  353  find / -perm /6000 2>/dev/null > /root/sugidfiles.txt
+  354  ./sugidcheck 
+  355  touch /tmp/testfile
+  356  chmod u+s /tmp/testfile
+  357  ./sugidcheck 
+  358  journalctl
+  359  crontab -e
+  360  exit
+  361  history
+  362  ls
+  363  cd rhcsa10/
+  364  ls
+  365  cd labs
+  366  ls
+  367  ./live-mini-exam-grade.sh 
+  368  cd
+  369  history
+  370  history > /tmp/sept26.txt 
+  371  exit
+  372  vim /etc/rsyslog.conf 
+  373  systemctl restart rsyslog.conf
+  374  systemctl restart rsyslog
+  375  firewall-cmd --get-services
+  376  firewall-cmd --get-services | grep log
+  377  firewall-cmd --add-service syslog --permanent
+  378  firewall-cmd --add-service syslog
+  379  firewall-cmd --list-all
+  380  tail /var/log/messages
+  381  date
+  382  grep IBEX /var/log/messages
+  383  systemctl restart rsyslog.service 
+  384  grep IBEX /var/log/messages
+  385  ip a
+  386  vim /etc/rsyslog.conf 
+  387  getenforce permissive
+  388  systemctl stop firewalld
+  389  grep IBEX /var/log/messages
+  390  vim /etc/rsyslog.conf 
+  391  cat /etc/redhat-release 
+  392  subscription-manager status
+  393  subscription-manager register
+  394  dnf install command-line-assist
+  395  kill -9 9665
+  396  dnf install command-line-assist
+  397  dnf install command-line-assistant
+  398  c --help | less
+  399  c "how can i ask command line assist to analyze a configuration file for errors"
+  400  cat /etc/rsyslog.conf | c "what is wrong in this file to configure my rsyslog for log reception from other systems"
+  401  c "how do i configure selinux to receive httpd traffic on port 82"
+  402  cd /etc/logrotate.d/
+  403  ls
+  404  cd ..
+  405  vim logrotate.conf 
+  406  cd -
+  407  vim firewalld 
+  408  cat /etc/rsyslog.conf 
+  409  tail /var/log/messages
+  410  setenforce enforcing
+  411  systemctl start firewalld
+  412  tail /var/log/messages
+  413  grep AVC /var/log/audit/audit.log 
+  414  date -d @1790782918
+  415  getenforce permissive
+  416  grep WHAT /var/log/messages
+  417  getenforce enforce
+  418  setenforce enforce
+  419  setenforce enforcing
+  420  firewall-cmd --list-all
+  421  systemctl stop firewalld
+  422  grep WHAT /var/log/messages
+  423  firewall-cmd --get-services | grep syslog
+  424  vim /usr/lib/firewalld/services/syslog.xml 
+  425  cp /usr/lib/firewalld/services/syslog.xml /etc/firewalld/services/
+  426  vim /etc/firewalld/services/syslog.xml 
+  427  systemctl start firewalld
+  428  firewall-cmd --help | grep -service
+  429  firewall-cmd --delete-service --permanent
+  430  firewall-cmd --delete-service syslog --permanent
+  431  cp /usr/lib/firewalld/services/syslog.xml /etc/firewalld/services/sander.xml
+  432  vim /etc/firewalld/services/sander.xml 
+  433  firewall-cmd --add-service sander
+  434  firewall-cmd --reload
+  435  firewall-cmd --add-service sander
+  436  firewall-cmd --list-all
+  437  tail /var/log/messages
+  438  cd
+  439  firewall-cmd --get-services | grep syslog
+  440  cat /usr/lib/firewalld/services/syslog-tls.xml 
+  441  systemctl status auditd
+  442  dnf install -y strace
+  443  ls
+  444  strace ls
+  445  strace -c ls
+  446  man auditctl
+  447  auditctl -w /etc/shadow -p wa
+  448  man auditctl
+  449  useradd theresa
+  450  grep shadow /var/log/audit/audit.log 
+  451  history
+  452  touch /tmp/afile
+  453  cat /etc/passwd
+  454  ls -lrt /tmp
+  455  strace -l chown theresa /tmp/afile
+  456  strace -c chown theresa /tmp/afile
+  457  man 2 fchownat
+  458  man 7 capabilities
+  459  man man
+  460  man 2 intro
+  461  man 8 intro
+  462  ls -l /etc/shadow
+  463  cat /etc/shadow
+  464  uname -r
+  465  less /proc/meminfo 
+  466  arch
+  467  less /proc/cpuinfo 
+  468  free -m
+  469  top
+  470  cd /proc
+  471  ls
+  472  ps aux | grep vllm
+  473  man proc
+  474  dnf list kernel*
+  475  dnf install -y kernel-doc-6.12.0-
+  476  dnf install -y kernel-doc
+  477  rpm -ql kernel-doc 
+  478  cd /usr/share/doc/kernel-doc-6.12.0-211.67.1/
+  479  ls
+  480  cd Documentation/
+  481  ls
+  482  grep -Rl commit
+  483  grep -Rl commit | grep -v output
+  484  grep -Rl commit | grep -v output | grep -v translatio
+  485  cd mm
+  486  ls
+  487  grep ls /proc/sys/vm
+  488   ls /proc/sys/vm
+  489  grep overcommit_memory *
+  490  less overcommit-accounting.rst 
+  491  cd
+  492  sysctl -a | grep overcommit_memory
+  493  sysctl -a | grep overcommit_memory >> /etc/sysctl.conf 
+  494  vim /etc/sysctl.conf 
+  495  reboot
+  496  top
+  497  vim /etc/sysctl.conf 
+  498  reboot
+  499  free -m
+  500  reboot
+  501  free -m
+  502  less /proc/meminfo 
+  503  dd if=/dev/zero of=/swapfile bs=1M count=1024
+  504  ls -l /swapfile 
+  505  chmod 600 /swapfile 
+  506  mkswap /swapfile 
+  507  swapon /swapfile
+  508  free -m
+  509  vim /etc/fstab
+  510  reboot
+  511  cd /proc
+  512  cd sys
+  513  ls
+  514  cd vm
+  515  ls
+  516  cat swappiness 
+  517  man proc
+  518  man procinfo
+  519  man sysctl
+  520  cd /usr/share/doc/kernel-doc-6.12.0-211.67.1/
+  521  ls
+  522  cd Documentation/
+  523  ls
+  524  cd mm
+  525  sk
+  526  ls
+  527  grep -l swappi *
+  528  cd ..
+  529  grep -lR swappi *
+  530  cd admin-guide/
+  531  ls
+  532  grep -lR swappi *
+  533  less sysctl/vm.rst 
+  534  sysctl -a
+  535  cd
+  536  cd /proc/sys/vm
+  537  echo 200 > swappiness 
+  538  cat swappiness 
+  539  free -m
+  540  sysctl -a | grep swappi >> /etc/sysctl.conf 
+  541  vim /etc/sysctl.conf 
+  542  sysctl -a | wc -l
+  543  vim /etc/sysctl.conf 
+  544  reboot
+  545  cd /proc/sys/vm
+  546  ls | grep dirty
+  547  sysctl -a | grep dirty
+  548  less /proc/meminfo 
+  549  cd 
+  550  ls
+  551  ./countdown 13
+  552  cd /proc/
+  553  ls
+  554  echo h > sysrq-trigger 
+  555  dmesg
+  556  echo f > sysrq-trigger 
+  557  journalctl
+  558  top
+  559  cd /proc/5554
+  560  ls
+  561  echo 500 > oom_adj
+  562  echo 200 > oom_adj
+  563  echo 10 > oom_adj
+  564  cat oom_score
+  565  echo -400 > oom_adj
+  566  echo -40 > oom_adj
+  567  cd
+  568  cgtop
+  569  systemd-cgtop 
+  570  lscpu | less
+  571  cd /sys/bus/cpu/devices/
+  572  ls
+  573  cd cpu1
+  574  ls
+  575  cat online 
+  576  echo 0 > online 
+  577  lscpu | less
+  578  cd
+  579  ls
+  580  git clone https://github.com/sandervanvugt/luth
+  581  cd luth/
+  582  ls
+  583  cat stress1.service 
+  584  cat stress2.service 
+  585  cp stress* /etc/systemd/system
+  586  systemctl daemon-reload
+  587  systemctl start stress1.service 
+  588  systemctl start stress2.service 
+  589  top
+  590  man systemd.directives
+  591  systemctl set-property system.slice CPUWeight=400
+  592  top
+  593  killall dd
+  594  man systemd.directives
+  595  man systemd.resource-control
+  596  systemctl edit httpd
+  597  systemctl status httpd
+  598  systemctl edit httpd
+  599  systemctl status httpd
+  600  systemctl restart httpd
+  601  systemctl status httpd
+  602  history > /tmp/oct26.txt
+  603  modinfo softdog
+  604  modprobe softdog
+  605  lsmod | grep softdog
+  606  history > /tmp/oct26.txt
